@@ -1,36 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MovieList from './components/MovieList';
+import './App.css';
 
 const App = () => {
-  const [movie, setMovie] = useState([
-    {
-      Title: 'The Lego Movie',
-      Year: '2014',
-      imdbID: 'tt1490017',
-      Type: 'movie',
-      Poster:
-        'https://m.media-amazon.com/images/M/MV5BMTg4MDk1ODExN15BMl5BanBnXkFtZTgwNzIyNjg3MDE@._V1_SX300.jpg',
-    },
-    {
-      Title: 'The Simpsons Movie',
-      Year: '2007',
-      imdbID: 'tt0462538',
-      Type: 'movie',
-      Poster:
-        'https://m.media-amazon.com/images/M/MV5BMTgxMDczMTA5N15BMl5BanBnXkFtZTcwMzk1MzMzMw@@._V1_SX300.jpg',
-    },
-    {
-      Title: 'Scary Movie',
-      Year: '2000',
-      imdbID: 'tt0175142',
-      Type: 'movie',
-      Poster:
-        'https://m.media-amazon.com/images/M/MV5BMGEzZjdjMGQtZmYzZC00N2I4LThiY2QtNWY5ZmQ3M2ExZmM4XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
-    },
-  ]);
+  const [movie, setMovie] = useState([]);
+
+  const getMovieRequest = async () => {
+    const url = 'http://www.omdbapi.com/?s=movie&apikey=a5e145c6';
+
+    const response = await fetch(url);
+
+    const responseJSON = await response.json();
+    setMovie(responseJSON.Search);
+  };
+
+  useEffect(() => {
+    getMovieRequest();
+  }, []);
 
   return (
-    <div>
+    <div className='container'>
       <MovieList movies={movie} />
     </div>
   );
