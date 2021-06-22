@@ -1,10 +1,18 @@
 import React from 'react';
 
 const MovieList = (props) => {
+  const FavouriteComponent = props.favouriteComponent;
   return (
     <div className='movies'>
       {props.movies.map((movie, index) => {
-        return <img key={index} src={movie.Poster} alt={movie.Title} />;
+        return (
+          <div>
+            <img key={index} src={movie.Poster} alt={movie.Title} />
+            <div onClick={() => props.handlefavouritesClick(movie)}>
+              <FavouriteComponent />
+            </div>
+          </div>
+        );
       })}
     </div>
   );
