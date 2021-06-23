@@ -8,7 +8,7 @@ const MovieList = (props) => {
         return (
           <div>
             <img key={index} src={movie.Poster} alt={movie.Title} />
-            <div onClick={() => props.handlefavouritesClick(movie)}>
+            <div onClick={() => props.handleFavouritesClick(movie)}>
               <FavouriteComponent />
             </div>
           </div>
